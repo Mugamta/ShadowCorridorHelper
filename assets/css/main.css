@@ -1,0 +1,220 @@
+/* ── 색 토큰 ───────────────────────────── */
+/* 기본은 밤(게임 분위기). 낮 테마는 data-theme="light" 또는 시스템 설정 */
+:root {
+  --bg: #0d0c0b;
+  --bg-2: #151311;
+  --surface: #1b1815;
+  --surface-2: #24201c;
+  --line: #342e28;
+  --text: #ece6dc;
+  --text-2: #b6ab9c;
+  --text-3: #7f7568;
+  --accent: #c8423a;
+  --accent-text: #e8776d;
+  --amber: #d9a441;
+  --sky: #6fb3d2;
+  --green: #79b86b;
+  --violet: #a68bd6;
+
+  /* 출처 배지 */
+  --src-game: #79b86b;
+  --src-pak: #6fb3d2;
+  --src-guess: #d9a441;
+
+  /* 감지 범위 그림 */
+  --sense-sight: #e0893a;
+  --sense-light: #d9c441;
+  --sense-sound: #9a8f80;
+  --sense-fire: #c8423a;
+  --sense-look: #79b86b;
+
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    --bg: #f6f2ea;
+    --bg-2: #efe9de;
+    --surface: #fffdf8;
+    --surface-2: #f3ede2;
+    --line: #ddd3c3;
+    --text: #221d18;
+    --text-2: #5a5047;
+    --text-3: #8a7f72;
+    --accent: #a8302a;
+    --accent-text: #a8302a;
+    --amber: #9a6a0e;
+    --sky: #2a7aa3;
+    --green: #3d7f2f;
+    --violet: #6a4fa3;
+    --src-game: #3d7f2f;
+    --src-pak: #2a7aa3;
+    --src-guess: #9a6a0e;
+    --sense-sight: #c4651a;
+    --sense-light: #a68d00;
+    --sense-sound: #7a7064;
+    --sense-fire: #a8302a;
+    --sense-look: #3d7f2f;
+    color-scheme: light;
+  }
+}
+
+:root[data-theme='light'] {
+  --bg: #f6f2ea;
+  --bg-2: #efe9de;
+  --surface: #fffdf8;
+  --surface-2: #f3ede2;
+  --line: #ddd3c3;
+  --text: #221d18;
+  --text-2: #5a5047;
+  --text-3: #8a7f72;
+  --accent: #a8302a;
+  --accent-text: #a8302a;
+  --amber: #9a6a0e;
+  --sky: #2a7aa3;
+  --green: #3d7f2f;
+  --violet: #6a4fa3;
+  --src-game: #3d7f2f;
+  --src-pak: #2a7aa3;
+  --src-guess: #9a6a0e;
+  --sense-sight: #c4651a;
+  --sense-light: #a68d00;
+  --sense-sound: #7a7064;
+  --sense-fire: #a8302a;
+  --sense-look: #3d7f2f;
+  color-scheme: light;
+}
+
+/* ── 기본 ───────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans KR', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+a {
+  color: var(--accent-text);
+}
+h1,
+h2,
+h3 {
+  font-family: 'Noto Serif KR', serif;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+h1 {
+  font-size: 30px;
+  margin: 0 0 8px;
+}
+h2 {
+  font-size: 22px;
+  margin: 44px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--line);
+}
+h3 {
+  font-size: 17px;
+  margin: 28px 0 8px;
+}
+p,
+ul,
+ol {
+  margin: 0 0 12px;
+}
+ul,
+ol {
+  padding-left: 22px;
+}
+li + li {
+  margin-top: 4px;
+}
+code {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.86em;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0 4px;
+  color: var(--text-2);
+}
+strong {
+  color: var(--text);
+}
+
+/* ── 페이지 틀 ───────────────────────────── */
+.page {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 32px 16px 64px;
+}
+.lead {
+  color: var(--text-2);
+  font-size: 16px;
+  max-width: 720px;
+}
+.muted {
+  color: var(--text-3);
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+.note {
+  background: var(--surface);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 8px 8px 0;
+  padding: 10px 14px;
+  margin: 12px 0;
+  color: var(--text-2);
+}
+.note.danger {
+  border-left-color: var(--accent);
+}
+
+/* ── 표 ───────────────────────────── */
+.table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  margin: 12px 0 16px;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+}
+th,
+td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+th {
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-weight: 500;
+  white-space: nowrap;
+}
+tr:last-child td {
+  border-bottom: 0;
+}
+td.num,
+th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
