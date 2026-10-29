@@ -1,0 +1,307 @@
+<template>
+  <div class="page">
+    <h1>게임 시스템</h1>
+    <p class="lead">적이 플레이어를 알아채는 길은 시야, 불빛, 소리 세 가지입니다.</p>
+    <p class="muted">
+      이 페이지에서 그냥 "배회자"라고 하면 카구라 방울의 배회자, 달리는 배회자, 살며시 다가오는
+      배회자, 천리안을 말합니다. 울음소리의 배회자와 경종의 배회자는 이름을 따로 적습니다.
+    </p>
+
+    <h2 id="sight">시야와 발견</h2>
+    <p>
+      배회자의 시야는 앞으로 눕힌 캡슐(둥근 막대) 모양입니다. 위에서 보면 앞으로 818, 좌우 300
+      정도이고, 몸 뒤로도 82 정도 걸칩니다. <SourceTag src="pak" />
+    </p>
+    <p>배회자가 추격을 시작하려면 아래가 모두 맞아야 합니다. <SourceTag src="pak" /></p>
+    <ol>
+      <li>적(눈높이 +70)에서 플레이어까지 선이 막히지 않는다.</li>
+      <li>
+        플레이어가 시야 캡슐 안에 있다. 또는 불을 켰고 더 큰 불빛 캡슐(앞 1636, 좌우 800) 안에 있다.
+      </li>
+      <li>숨는 곳에서 밖을 내다보는 중이 아니다.</li>
+    </ol>
+    <div class="note">
+      적의 앞에 있다고 바로 들키는 것은 아닙니다. 위 조건이 모두 맞아야 추격이 시작되고, 들켰는지는
+      추격이 시작되는지로만 알 수 있습니다.
+    </div>
+    <p>배회자는 플레이어와 대략 2000 안일 때만 시야 판정을 켭니다. <SourceTag src="pak" /></p>
+
+    <h3>앉기</h3>
+    <p>
+      배회자에게 앉기는 시야 범위를 바꾸지 않습니다. 몸이 낮아져서 낮은 장애물이 시선을 막고, 뛰는
+      소리가 안 나는 효과뿐입니다. <SourceTag src="pak" /> 울음소리의 배회자는 다릅니다. 앉아서
+      가만히 있으면 두리번거리지 않습니다(<NuxtLink to="/enemies#crying">울음소리의 배회자</NuxtLink
+      >).
+    </p>
+
+    <h2 id="light">불빛</h2>
+    <ul>
+      <li>
+        라이터와 손전등은 배회자에게 똑같습니다. 둘 다 "불 켬" 하나만 켭니다.
+        <SourceTag src="pak" />
+      </li>
+      <li>
+        불을 켜면 배회자 시야가 앞 1636, 좌우 800으로 넓어집니다(경종은 앞 1721).
+        <SourceTag src="pak" />
+      </li>
+      <li>
+        울음소리의 배회자에게는 다릅니다. 라이터는 600 안에서 시야에 있고 두리번 중일 때만, 손전등은
+        울음소리의 배회자를 정면으로 비추면 두리번을 일으킵니다. <SourceTag src="pak" />
+      </li>
+      <li>
+        초보자에서는 배회자 불빛 캡슐이 좌우 500, 높이 반 700으로 줄고 추격 속도가 ×0.7이
+        됩니다(<NuxtLink to="#difficulty">난이도</NuxtLink>).
+        <SourceTag src="pak" />
+      </li>
+    </ul>
+
+    <h2 id="sound">소리</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>적</th>
+            <th class="num">발소리(뛸 때)</th>
+            <th class="num">폭죽</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>카구라 방울의 배회자, 살며시 다가오는 배회자</td>
+            <td class="num">2300</td>
+            <td class="num">3000</td>
+          </tr>
+          <tr>
+            <td>달리는 배회자</td>
+            <td class="num">찾아오지 않음</td>
+            <td class="num">3000</td>
+          </tr>
+          <tr>
+            <td>천리안</td>
+            <td class="num">1800 (뛰지 않아도)</td>
+            <td class="num">3000</td>
+          </tr>
+          <tr>
+            <td>경종의 배회자</td>
+            <td class="num">1500</td>
+            <td class="num">3000</td>
+          </tr>
+          <tr>
+            <td>울음소리의 배회자</td>
+            <td class="num">없음</td>
+            <td class="num">1200</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ul>
+      <li>
+        소리는 적 위치에서 3D 직선거리만 봅니다. 벽과 시선은 상관없습니다. 소리 범위는 난이도와
+        상관없습니다. <SourceTag src="pak" />
+      </li>
+      <li>
+        그래서 여러 층 맵에서는 다른 층의 발소리도 들리고, 시체가 흐르는 계곡처럼 높이 차가 큰
+        곳에서는 바로 위아래여도 못 듣습니다. 내 높이에서 들리는 범위는 √(거리² − 높이 차²)입니다.
+      </li>
+      <li>
+        발소리는 뛸 때만 납니다. 걷기와 앉아 걷기는 소리가 없습니다(천리안은 예외).
+        <SourceTag src="pak" />
+      </li>
+    </ul>
+
+    <h3 id="firework">폭죽</h3>
+    <ul>
+      <li>
+        던진 폭죽은 땅에 떨어지고 1초 뒤부터 5초 동안 터집니다. 그동안 3000 안의 적이 그 자리를
+        목표로 삼습니다.
+        <SourceTag src="pak" />
+      </li>
+      <li>
+        적은 폭죽 자리 150 안에 도착하거나, 10초 동안 막혀 못 움직일 때까지 그쪽으로 갑니다. 폭죽이
+        다 터진 뒤에도 도착할 때까지 계속 갑니다.
+      </li>
+      <li>
+        폭죽으로 가는 중인 카구라 방울의 배회자는 발소리를 듣지 못합니다. 폭죽을 던지고 뛰어서
+        빠져나갈 수 있습니다.
+      </li>
+    </ul>
+
+    <h2 id="lose">추격 해제</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>적</th>
+            <th class="num">도전자·파괴자</th>
+            <th class="num">초보자</th>
+            <th>규칙</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>배회자</td>
+            <td class="num">10초</td>
+            <td class="num">0.7초</td>
+            <td>시선이 끊긴 동안만 줄어든다. 시선이 통하면 시야 밖이어도 다시 가득 찬다.</td>
+          </tr>
+          <tr>
+            <td>울음소리의 배회자</td>
+            <td class="num">10초</td>
+            <td class="num">7초</td>
+            <td>안 보이거나 숨는 곳에 있는 동안 차오르고, 보이면 0으로 돌아간다.</td>
+          </tr>
+          <tr>
+            <td>경종의 배회자</td>
+            <td class="num">15초</td>
+            <td class="num">8초</td>
+            <td>배회자와 같다. 물 모드 추격은 이 타이머를 쓰지 않는다.</td>
+          </tr>
+          <tr>
+            <td>천리안</td>
+            <td class="num">없음</td>
+            <td class="num">없음</td>
+            <td>폭죽·손거울·수정구슬·카메라·순간이동으로만 뗀다.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">
+      <SourceTag src="pak" /> 초보자의 배회자 0.7초는 다른 적에 비해 유난히 짧아서, 실제로는 다를 수
+      있습니다 <SourceTag src="guess" />. 숨는 곳에서 밖을 내다보는 동안에도 배회자 타이머는
+      줄어듭니다.
+    </p>
+
+    <h2 id="difficulty">난이도</h2>
+    <p>난이도는 초보자, 도전자, 파괴자 세 가지입니다.</p>
+
+    <h3>받는 피해</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>맵</th>
+            <th class="num">초보자</th>
+            <th class="num">도전자</th>
+            <th class="num">파괴자</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>5×5 맵</td>
+            <td class="num">×1</td>
+            <td class="num">×1</td>
+            <td class="num">×2</td>
+          </tr>
+          <tr>
+            <td>시체가 흐르는 계곡</td>
+            <td class="num">×0.5</td>
+            <td class="num">×1</td>
+            <td class="num">×2</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted"><SourceTag src="pak" /> 떨어져서 입는 피해에는 배수가 붙지 않습니다.</p>
+
+    <h3>적의 능력</h3>
+    <p>
+      적의 능력은 초보자에서만 약해집니다. 도전자와 파괴자는 능력이 같고, 적의 수와 종류(아래 표),
+      받는 피해, 계곡의 함정이 다릅니다. <SourceTag src="pak" />
+    </p>
+    <ul>
+      <li>
+        카구라 방울의 배회자, 달리는 배회자, 살며시 다가오는 배회자, 천리안: 초보자에서 추격 속도
+        ×0.7(189), 불빛 시야가 좌우 500·높이 반 700으로 줄고, 추격 해제가 0.7초입니다.
+        <SourceTag src="pak" />
+      </li>
+      <li>
+        울음소리의 배회자: 초보자에서 추격 속도 ×0.7(210), 추격 해제 7초입니다.
+        <SourceTag src="pak" />
+      </li>
+      <li>
+        경종의 배회자: 초보자에서 불빛 시야가 같은 크기로 줄고 추격 해제가 8초입니다. 속도는
+        같습니다. <SourceTag src="pak" />
+      </li>
+      <li>
+        증오를 흩뿌리는 그림자: 시체가 흐르는 계곡에서만 초보자 140(카메라 기절 35초), 그 밖의
+        난이도 240(기절 25초)입니다. 5×5 맵에서는 난이도와 상관없이 160입니다.
+        <SourceTag src="pak" />
+      </li>
+      <li>대식가: 초보자 240, 도전자 400, 파괴자 600. <SourceTag src="pak" /></li>
+    </ul>
+
+    <h3>처음 배치되는 적의 수</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>맵</th>
+            <th>난이도</th>
+            <th class="num">카구라 방울</th>
+            <th class="num">달리는</th>
+            <th class="num">울음소리(배회형)</th>
+            <th class="num">살며시</th>
+            <th class="num">경종</th>
+            <th class="num">천리안</th>
+            <th class="num">떠도는 영혼</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(r, i) in ENEMY_COUNTS" :key="i" :class="{ first: r.map }">
+            <td>{{ r.map }}</td>
+            <td>{{ r.mode }}</td>
+            <td v-for="(n, j) in r.n" :key="j" class="num" :class="{ zero: !n }">{{ n }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">
+      <SourceTag src="pak" /> 시작할 때 맵에 놓이는 수입니다. 제자리형 울음소리의 배회자와
+      함정방에서 나오는 적은 따로입니다. 성역에는 초보자 설정이 없습니다.
+    </p>
+
+    <h2 id="alert">경계</h2>
+    <ul>
+      <li>
+        소리를 듣고 그쪽으로 걸어가는 상태가 경계입니다. 경계 중에도 걷기 속도 그대로입니다.
+        <SourceTag src="pak" />
+      </li>
+      <li>달리는 배회자는 발소리를 듣고 찾아오지 않습니다.</li>
+      <li>
+        울음소리의 배회자의 두리번(경계)은 한 번 켜지면 끝난 뒤에도 켜진 채로 남고, 제자리형은
+        처음부터 켜져 있습니다.
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script setup lang="ts">
+useHead({ title: '게임 시스템 · 그림자 복도 공략 노트' })
+
+// 맵·난이도별 처음 배치 수: 카구라 방울, 달리는, 울음소리(배회형), 살며시, 경종, 천리안, 떠도는 영혼
+const ENEMY_COUNTS = [
+  { map: 'Random5x5 (Stage1)', mode: '초보자', n: [2, 1, 0, 0, 0, 0, 0] },
+  { map: '', mode: '도전자', n: [4, 1, 0, 0, 0, 0, 0] },
+  { map: '', mode: '파괴자', n: [1, 1, 4, 1, 2, 2, 0] },
+  { map: 'Extra5x5 (Stage3)', mode: '초보자', n: [0, 1, 0, 2, 0, 0, 0] },
+  { map: '', mode: '도전자', n: [0, 1, 4, 4, 0, 0, 0] },
+  { map: '', mode: '파괴자', n: [0, 2, 4, 3, 0, 0, 0] },
+  { map: 'Stage5x5 (Stage5)', mode: '초보자', n: [2, 1, 0, 0, 2, 0, 2] },
+  { map: '', mode: '도전자', n: [2, 1, 3, 0, 2, 0, 3] },
+  { map: '', mode: '파괴자', n: [0, 1, 0, 2, 2, 1, 3] },
+  { map: 'Stage6x5 (Stage7, 성역)', mode: '도전자', n: [3, 1, 0, 0, 0, 2, 0] },
+  { map: '', mode: '파괴자', n: [0, 1, 0, 3, 0, 2, 0] },
+]
+</script>
+
+<style scoped>
+h2 {
+  scroll-margin-top: 64px;
+}
+tr.first td {
+  border-top: 2px solid var(--line);
+}
+td.zero {
+  color: var(--text-3);
+}
+</style>

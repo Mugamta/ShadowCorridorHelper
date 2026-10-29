@@ -5,90 +5,83 @@
       속도는 초당 게임 단위(100 = 1m)입니다. 플레이어는 걸으면 130, 뛰면 350, 앉아 걸으면 50입니다.
     </p>
     <nav class="toc">
-      <a v-for="e in ENEMIES" :key="e.id" :href="`#${e.id}`">{{ e.name }}</a>
-      <a href="#others">그 밖의 적</a>
+      <div v-for="g in GROUPS" :key="g.id">
+        <a :href="`#${g.id}`" class="toc-group">{{ g.title }}</a>
+        <a v-for="e in g.list" :key="e.id" :href="`#${e.id}`">{{ e.name }}</a>
+      </div>
     </nav>
 
-    <section v-for="e in ENEMIES" :id="e.id" :key="e.id" class="enemy">
-      <h2>
-        {{ e.name }}
-        <span v-if="e.nick" class="nick">{{ e.nick }}</span>
-      </h2>
-      <p class="internal muted">
-        내부 이름 <code>{{ e.internal }}</code>
-      </p>
-      <p>{{ e.summary }}</p>
+    <section v-for="g in GROUPS" :id="g.id" :key="g.id" class="group">
+      <h2>{{ g.title }}</h2>
+      <p v-if="g.intro" class="muted">{{ g.intro }}</p>
 
-      <div class="body" :class="{ wide: !e.sense }">
-        <div>
-          <dl class="stats">
-            <div>
-              <dt>배회</dt>
-              <dd>{{ e.walk }}</dd>
-            </div>
-            <div>
-              <dt>추격</dt>
-              <dd>{{ e.chase }}</dd>
-            </div>
-            <div>
-              <dt>시야</dt>
-              <dd>{{ e.sight }}</dd>
-            </div>
-            <div>
-              <dt>발소리</dt>
-              <dd>{{ e.sprint }}</dd>
-            </div>
-            <div>
-              <dt>폭죽</dt>
-              <dd>{{ e.firework }}</dd>
-            </div>
-            <div>
-              <dt>추격 해제</dt>
-              <dd>{{ e.lose }}</dd>
-            </div>
-          </dl>
-          <ul class="facts">
-            <li v-for="(f, i) in e.facts" :key="i">{{ f.text }} <SourceTag :src="f.src" /></li>
-          </ul>
+      <section v-for="e in g.list" :id="e.id" :key="e.id" class="enemy">
+        <h3>{{ e.name }}</h3>
+        <p>{{ e.summary }}</p>
+
+        <div class="body" :class="{ wide: !e.sense }">
+          <div>
+            <dl class="stats">
+              <div>
+                <dt>배회</dt>
+                <dd>{{ e.walk }}</dd>
+              </div>
+              <div>
+                <dt>추격</dt>
+                <dd>{{ e.chase }}</dd>
+              </div>
+              <div>
+                <dt>시야</dt>
+                <dd>{{ e.sight }}</dd>
+              </div>
+              <div>
+                <dt>발소리</dt>
+                <dd>{{ e.sprint }}</dd>
+              </div>
+              <div>
+                <dt>폭죽</dt>
+                <dd>{{ e.firework }}</dd>
+              </div>
+              <div>
+                <dt>추격 해제</dt>
+                <dd>{{ e.lose }}</dd>
+              </div>
+            </dl>
+            <ul class="facts">
+              <li v-for="(f, i) in e.facts" :key="i">{{ f.text }} <SourceTag :src="f.src" /></li>
+            </ul>
+          </div>
+          <SenseDiagram
+            v-if="e.sense"
+            :name="e.name"
+            :capsules="e.sense.capsules"
+            :circles="e.sense.circles"
+          />
         </div>
-        <SenseDiagram
-          v-if="e.sense"
-          :name="e.name"
-          :capsules="e.sense.capsules"
-          :circles="e.sense.circles"
-        />
-      </div>
-    </section>
+      </section>
 
-    <section id="others">
-      <h2>그 밖의 적</h2>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>적</th>
-              <th>내부 이름</th>
-              <th class="num">속도</th>
-              <th>메모</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="m in MINOR_ENEMIES" :key="m.internal">
-              <td>{{ m.name }}</td>
-              <td>
-                <code>{{ m.internal }}</code>
-              </td>
-              <td class="num">{{ m.speed }}</td>
-              <td>{{ m.note }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="muted">
-        속도는 게임 파일 값입니다 <SourceTag src="pak" />. 배회자 종류 번호(EnemyTipe) 2·3은
-        울음소리 배회자(서 있는 것, 걷는 것), 5는 경종(BellMan)으로 보이지만 게임에서 모습을
-        확인하지는 않았습니다 <SourceTag src="guess" />. 심연의 안내인은 적이 아닙니다.
-      </p>
+      <template v-if="g.id === 'others'">
+        <h3 id="minor">자세히 모르는 적</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>적</th>
+                <th class="num">속도</th>
+                <th>메모</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="m in MINOR_ENEMIES" :key="m.name">
+                <td>{{ m.name }}</td>
+                <td class="num">{{ m.speed }}</td>
+                <td>{{ m.note }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted">속도는 플레이로 아직 확인하지 않았습니다 <SourceTag src="pak" />.</p>
+      </template>
     </section>
   </div>
 </template>
@@ -97,15 +90,39 @@
 import { ENEMIES, MINOR_ENEMIES } from '~/data/enemies'
 
 useHead({ title: '적 · 그림자 복도 공략 노트' })
+
+const GROUPS = [
+  {
+    id: 'wanderers',
+    title: '배회자',
+    intro:
+      '순찰하다가 플레이어를 보거나 들으면 쫓아오는 적들입니다. 값은 도전자·파괴자 기준이고, 초보자에서 달라지는 값은 따로 적었습니다. 도전자와 파괴자는 적의 능력이 같고 수와 종류만 다릅니다.',
+    list: ENEMIES.filter((e) => e.group === 'wanderer'),
+  },
+  {
+    id: 'others',
+    title: '그 밖의 적',
+    intro: '',
+    list: ENEMIES.filter((e) => e.group === 'other'),
+  },
+]
 </script>
 
 <style scoped>
 .toc {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 14px;
+  display: grid;
+  gap: 6px;
   font-size: 14px;
   margin: 16px 0 8px;
+}
+.toc div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+}
+.toc .toc-group {
+  color: var(--text);
+  font-weight: 700;
 }
 .toc a {
   color: var(--text-2);
@@ -117,23 +134,9 @@ useHead({ title: '적 · 그림자 복도 공략 노트' })
 .enemy {
   scroll-margin-top: 64px;
 }
-#others {
+.group,
+#minor {
   scroll-margin-top: 64px;
-}
-.nick {
-  font-family: 'Noto Sans KR', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-3);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 1px 8px;
-  vertical-align: 0.2em;
-  margin-left: 6px;
-}
-.internal {
-  font-size: 12px;
-  margin-bottom: 8px;
 }
 .body {
   display: grid;

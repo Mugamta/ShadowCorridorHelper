@@ -1,4 +1,4 @@
-// 출처: game = 게임에서 확인, pak = 게임 파일 분석, guess = 추정
+// 출처: game = 게임에서 확인(배지 없음), pak = 게임 파일 분석("미확인" 배지), guess = 추정
 export type Src = 'game' | 'pak' | 'guess'
 
 export interface Fact {
@@ -23,7 +23,7 @@ export interface SenseCircle {
 export interface Enemy {
   id: string
   name: string
-  nick?: string
+  group: 'wanderer' | 'other' // 배회자 / 그 밖의 적
   internal: string
   walk: string
   chase: string

@@ -20,10 +20,11 @@
 
 <script setup lang="ts">
 const links = [
+  { to: '/system', label: '게임 시스템' },
   { to: '/enemies', label: '적' },
-  { to: '/detection', label: '감지·추격' },
-  { to: '/player', label: '플레이어·아이템' },
-  { to: '/maps', label: '맵 기믹' },
+  { to: '/player', label: '플레이어' },
+  { to: '/items', label: '아이템' },
+  { to: '/maps', label: '맵' },
 ]
 
 // ── 테마 ───────────────────────────── (nuxt.config.ts 의 head 스크립트와 같은 'sc-theme' 키)

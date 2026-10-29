@@ -7,9 +7,8 @@
     <footer class="footer">
       <span>팬이 만든 비공식 정리입니다. 게임과 이름의 권리는 원작자에게 있습니다.</span>
       <span>
-        출처 표시:
-        <SourceTag src="game" /> 게임에서 확인 <SourceTag src="pak" /> 게임 파일 분석
-        <SourceTag src="guess" /> 추정
+        표시가 없는 내용은 게임에서 확인했습니다.
+        <SourceTag src="pak" /> 플레이로 아직 확인 안 함 <SourceTag src="guess" /> 추정
       </span>
     </footer>
   </div>
