@@ -35,3 +35,21 @@ export interface Enemy {
   facts: Fact[]
   sense?: { capsules: SenseCapsule[]; circles: SenseCircle[] }
 }
+
+// 정해진 아이템 자리 (data/fixedItems.ts)
+export type FixedItem = [name: string, count: number, chance: string] // chance: '항상' | '약 31%' | '판마다 다름'
+export interface FixedSpot {
+  kind: string // '놓임' | '확정 선반' | '확정 서랍' | '전용 칸 선반' | '전용 칸 서랍'
+  items: FixedItem[]
+  where: string // 시작 지점·곡옥 제단·출구 문에서의 거리와 층. 방 타일 안이면 ''
+  floor: string
+  enemies: string[] // 1000 안에 나오는 배회자
+  note?: string
+}
+export interface FixedStage {
+  id: string
+  title: string
+  fixed: FixedSpot[] // 매 판 같은 자리
+  rooms: FixedSpot[][] // 5×5 맵의 방(위치는 판마다 바뀜)마다
+  starts?: FixedSpot[][] // 매미의 복도 시작 방 4가지
+}

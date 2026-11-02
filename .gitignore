@@ -26,3 +26,6 @@ logs
 # 데이터 빌드 소스 캐시
 scripts/.cache
 scripts/.debug
+
+# 사이트와 관계없는 문서는 올리지 않음
+*.md

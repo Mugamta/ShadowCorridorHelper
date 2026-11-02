@@ -25,6 +25,7 @@ const links = [
   { to: '/player', label: '플레이어' },
   { to: '/items', label: '아이템' },
   { to: '/maps', label: '맵' },
+  { to: '/fixed-items', label: '아이템 자리' },
 ]
 
 // ── 테마 ───────────────────────────── (nuxt.config.ts 의 head 스크립트와 같은 'sc-theme' 키)
