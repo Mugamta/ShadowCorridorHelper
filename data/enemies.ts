@@ -484,17 +484,46 @@ export const ENEMIES: Enemy[] = [
       },
     ],
   },
+  {
+    id: 'throughter',
+    group: 'other',
+    name: '대식가',
+    internal: 'BP_Throughter_C',
+    walk: '배회하지 않음',
+    chase: '초보자 240 · 도전자 400 · 파괴자 600',
+    sight: '-',
+    sprint: '-',
+    firework: '-',
+    lose: '-',
+    summary: '대식가 스테이지에서 정해진 곳을 지나면 쫓아오기 시작하는 적. 잡히면 즉사한다.',
+    facts: [
+      {
+        text: '속도는 난이도로 정해진다. 초보자 240, 도전자 400, 파괴자 600. 도전자와 파괴자에서는 플레이어가 달리는 속도(350)보다 빠르다.',
+        src: 'game',
+      },
+      {
+        text: '물에 들어가도 속도가 바뀌지 않는다. 물속과 물 밖의 속도가 같다.',
+        src: 'pak',
+      },
+      {
+        text: '대식가 스테이지의 한 구간에서만 느려진다. 위층 물길에서 옆으로 빠지는 길에 들어서면 초보자 70, 도전자·파괴자 170이 되고, 아래층 물길에서 쇠사슬 소리와 함께 다리가 내려오는 곳에 이르면 원래 속도로 돌아온다.',
+        src: 'pak',
+      },
+      {
+        text: '내려와 있는 수문에 막히면 멈춰 서서 수문을 때린다. 멈추는 시간은 수문마다 달라 2~18초다.',
+        src: 'pak',
+      },
+      {
+        text: '수문을 부수고 나면 난이도별 원래 속도로 돌아온다. 느려지는 구간 안에 있던 수문이어도 마찬가지다.',
+        src: 'pak',
+      },
+    ],
+  },
 ]
 
 // 자세한 분석이 없는 적
 export const MINOR_ENEMIES: { name: string; internal: string; speed: string; note: string }[] = [
   { name: '가면 벌레', internal: 'BP_Bug_Fly_C', speed: '330', note: '' },
-  {
-    name: '대식가',
-    internal: 'BP_Throughter_C',
-    speed: '240 / 400 / 600',
-    note: '초보자 / 도전자 / 파괴자',
-  },
   {
     name: '큰 거미',
     internal: 'BP_Spider_C',

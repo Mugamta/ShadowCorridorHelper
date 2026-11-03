@@ -239,6 +239,8 @@ const SPEEDS: Speed[] = (
     { name: '대식가', note: '파괴자', v: 600, kind: 'foe' },
     { name: '대식가', note: '도전자', v: 400, kind: 'foe' },
     { name: '대식가', note: '초보자', v: 240, kind: 'foe' },
+    { name: '대식가', note: '느려지는 구간 (도전자·파괴자)', v: 170, kind: 'foe' },
+    { name: '대식가', note: '느려지는 구간 (초보자)', v: 70, kind: 'foe' },
     { name: '방대해진 증오', note: '', v: 200, kind: 'foe' },
   ] as Speed[]
 ).sort((a, b) => b.v - a.v || (a.kind === 'me' ? -1 : 1))
