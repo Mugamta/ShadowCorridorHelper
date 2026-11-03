@@ -138,6 +138,10 @@ text {
 .circle circle {
   fill: none;
 }
+.circle.sight circle {
+  stroke: var(--sense-sight);
+  fill: color-mix(in srgb, var(--sense-sight) 22%, transparent);
+}
 .circle.sound circle {
   stroke: var(--sense-sound);
   stroke-dasharray: 3 4;
@@ -152,6 +156,9 @@ text {
 }
 .circle text {
   text-anchor: middle;
+}
+.circle.sight text {
+  fill: var(--sense-sight);
 }
 .circle.sound text {
   fill: var(--sense-sound);

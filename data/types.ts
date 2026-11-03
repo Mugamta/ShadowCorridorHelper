@@ -15,7 +15,7 @@ export interface SenseCapsule {
   r: number // 좌우 반폭
 }
 export interface SenseCircle {
-  kind: 'sound' | 'fire' | 'look'
+  kind: 'sound' | 'fire' | 'look' | 'sight'
   label: string
   r: number
 }

@@ -97,13 +97,29 @@ export const ENEMIES: Enemy[] = [
     internal: 'EG_EnemyPawn_C · EnemyTipe 4',
     walk: '85',
     chase: '270 · 초보자 189',
-    sight: '앞 818 · 불 켜면 1636 (초보자 1336)',
+    sight: '사방 600 · 불 켜면 앞 1636도 (초보자 1336)',
     sprint: '2300',
     firework: '3000',
     lose: '10초 · 초보자 0.7초',
-    summary: '아주 느리게 다가오는 배회자.',
-    sense: wander(2300),
+    summary: '아주 느리게 다가오는 배회자. 다른 배회자와 달리 등 뒤까지 사방을 본다.',
+    // VewTrigger를 지우고 BrainVewTrigger 구(반지름 600)를 남긴다
+    sense: {
+      capsules: [WANDERER_LIGHT],
+      circles: [
+        { kind: 'sight', label: '시야 600', r: 600 },
+        { kind: 'sound', label: '달리기 소리 2300', r: 2300 },
+        { kind: 'fire', label: '폭죽 3000', r: 3000 },
+      ],
+    },
     facts: [
+      {
+        text: '시야가 앞쪽 캡슐이 아니라 사방 600이다. 불을 꺼도 등 뒤나 옆으로 600 안에 들어가면 시선이 통할 때 들킨다. 대신 앞쪽으로는 다른 배회자(818)보다 짧다.',
+        src: 'pak',
+      },
+      {
+        text: '불을 켜면 사방 600에 더해 불빛 범위(앞 1636, 좌우 800)에서도 들킨다.',
+        src: 'pak',
+      },
       {
         text: '배회 속도 85로 플레이어가 걷는 속도(130)보다 느리다. 추격은 다른 배회자와 같은 270이다.',
         src: 'game',
