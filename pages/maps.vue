@@ -30,8 +30,8 @@
       맵"은 무작위 맵 네 곳을 말합니다(성역은 6×5).
     </p>
     <p>
-      출구의 곡옥 재단에 바칠 곡옥은 초보자 3개, 도전자·파괴자 5개입니다. 초보자에서는 3개만
-      모으면 출구로 가도 됩니다.
+      출구의 곡옥 재단에 바칠 곡옥은 초보자 3개, 도전자·파괴자 5개입니다. 초보자에서는 3개만 모으면
+      출구로 가도 됩니다.
     </p>
 
     <h2 id="shadow">증오를 흩뿌리는 그림자 등장 조건</h2>
@@ -161,6 +161,87 @@
       </li>
     </ul>
 
+    <h2 id="reunion">해후의 곡옥</h2>
+    <p>
+      해후의 두 전투에서는 곡옥을 재단에 바치지 않고 쏴서 보스를 맞힙니다. 곡옥은 정해진 자리에 놓여
+      있고, 먹으면 다시 생깁니다.
+    </p>
+    <ul>
+      <li>곡옥이 놓인 자리는 바닥이 초록색으로 빛납니다.</li>
+      <li>닿으면 바로 1개를 먹습니다. <SourceTag src="pak" /></li>
+      <li>
+        <strong>먹고 30초 뒤</strong> 같은 자리에 다시 생깁니다. 자리마다 따로 잽니다. 난이도와
+        상관없습니다. <SourceTag src="pak" />
+      </li>
+      <li>
+        최대 5개까지 가질 수 있습니다. 5개일 때 닿으면 먹어지지 않고 그 자리에 남습니다.
+        <SourceTag src="pak" />
+      </li>
+      <li>
+        곡옥을 고르고 사용하면 보는 쪽으로 쏘며, 한 발에 1개가 줄어듭니다. 0개면 쏠 수 없습니다.
+        아이템 무한을 켜면 줄지 않습니다. <SourceTag src="pak" />
+      </li>
+      <li>
+        전투 전에는 곡옥이 보이지 않고, 전투 직전 장면에서 나타납니다. <SourceTag src="pak" />
+      </li>
+    </ul>
+
+    <h3>방대해진 증오 전투: 곡옥 15자리</h3>
+    <ReunionMap
+      title="방대해진 증오 전투"
+      :ext="2800"
+      :magatama="STAGE8_MAGATAMA"
+      :orbs="STAGE8_ORBS"
+      :walls="STAGE8_WALLS"
+      :high="STAGE8_HIGH"
+      :marks="[{ x: -2500, y: -200, label: '입구' }]"
+    />
+    <ul>
+      <li>높은 바닥에 4자리, 나머지 11자리는 낮은 곳에 있습니다. <SourceTag src="pak" /></li>
+      <li>
+        초록 구는 11개입니다. 먹으면 스태미나가 100이 되고 30초 뒤 다시 생깁니다.
+        <SourceTag src="pak" />
+      </li>
+      <li>
+        <strong>25발</strong>을 맞히면 쓰러집니다. 평소에는 방패에 막혀 횟수가 오르지 않고, 번개와
+        함께 방패가 꺼진 동안에만 들어갑니다. <SourceTag src="pak" />
+      </li>
+      <li>
+        5발마다 단계가 오르고, 그때 방패가 다시 켜지며 5초 동안은 맞혀도 들어가지 않습니다.
+        <SourceTag src="pak" />
+      </li>
+      <li>
+        방패가 꺼져 있는 시간은 단계마다 15초, 10초, 7초, 6초, 5초로 줄어듭니다.
+        <SourceTag src="pak" />
+      </li>
+      <li>방패는 30초마다 꺼지는 것으로 보입니다. <SourceTag src="guess" /></li>
+    </ul>
+
+    <h3>사미호 전투: 곡옥 36자리</h3>
+    <ReunionMap
+      title="사미호 전투"
+      :ext="2300"
+      :magatama="STAGE82_MAGATAMA"
+      :marks="[
+        { x: -1506, y: -277, label: '시작' },
+        { x: 2, y: -270, label: '사미호' },
+      ]"
+    />
+    <ul>
+      <li>
+        3개씩 모인 무더기가 12곳에 있습니다. 초록 구는 없습니다.
+        <SourceTag src="pak" />
+      </li>
+      <li>
+        <strong>40발</strong>을 맞히면 쓰러집니다. 방패는 없습니다. 8발마다 단계가 오르고, 그때 7초
+        동안은 맞혀도 들어가지 않습니다. <SourceTag src="pak" />
+      </li>
+      <li>
+        사미호가 띄우는 태양은 5발이면 부서집니다. 사미호의 40발에는 들어가지 않습니다.
+        <SourceTag src="pak" />
+      </li>
+    </ul>
+
     <h2 id="lever">레버</h2>
     <ul>
       <li>
@@ -237,6 +318,14 @@
 </template>
 
 <script setup lang="ts">
+import {
+  STAGE82_MAGATAMA,
+  STAGE8_HIGH,
+  STAGE8_MAGATAMA,
+  STAGE8_ORBS,
+  STAGE8_WALLS,
+} from '~/data/reunionMap'
+
 useHead({ title: '맵 · 그림자 복도 공략 노트' })
 
 // 메뉴 순서(EX는 추가 스테이지). 무작위 = 타일 맵
